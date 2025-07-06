@@ -1,0 +1,10 @@
+package: openapi
+generate:
+  types: true
+  echo-server: true
+  embedded-spec: true
+output: gen/openapi/v1/servers.gen.go
+output-options:
+  skip-prune: true
+
+# oapi-codegen -generate "types,echo-server,embedded-spec" -o gen/openapi/v1/servers.gen.go -package openapi api/openapi.yaml

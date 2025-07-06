@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # api:
+  #   build:
+  #     context: ..
+  #     dockerfile: ./docker/Dockerfile
+  #   depends_on:
+  #     - postgres
+  #   env_file:
+  #     - .local.env
+  #   ports:
+  #     - "8080:8080"
+    
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infrastructure/database/00-create-db.sql:/docker-entrypoint-initdb.d/00-create-db.sql
+      - ./infrastructure/database/01-init-tables.sql:/docker-entrypoint-initdb.d/01-init-tables.sql
+
+    env_file:
+      - .local.env
+
+volumes:
+  postgres_data: 
